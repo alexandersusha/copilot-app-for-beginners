@@ -1,5 +1,7 @@
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { filterBooks, type BookFiltersState } from "../App";
+import { BookFilters } from "../components/BookFilters";
 import { books } from "../data/books";
 
 const defaultFilters: BookFiltersState = {
@@ -26,5 +28,23 @@ describe("filterBooks", () => {
     });
 
     expect(results.map((book) => book.title)).toEqual(["The Night Circus"]);
+  });
+
+  it("uses descriptive labels for each filter field", () => {
+    render(
+      <BookFilters
+        genres={["Fantasy", "Mystery"]}
+        searchTerm=""
+        selectedGenre="all"
+        readingStatus="all"
+        onSearchTermChange={() => {}}
+        onGenreChange={() => {}}
+        onReadingStatusChange={() => {}}
+      />
+    );
+
+    expect(screen.getByLabelText("Search by title or author")).toBeTruthy();
+    expect(screen.getByLabelText("Genre")).toBeTruthy();
+    expect(screen.getByLabelText("Reading status")).toBeTruthy();
   });
 });

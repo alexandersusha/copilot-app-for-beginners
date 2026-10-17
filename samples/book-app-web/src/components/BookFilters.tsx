@@ -22,19 +22,24 @@ export function BookFilters({
 }: BookFiltersProps) {
   return (
     <section className="filters" aria-label="Book filters">
-      <label>
-        Search
+      <label htmlFor="search-by-title-or-author">
+        Search by title or author
         <input
+          id="search-by-title-or-author"
           type="search"
           value={searchTerm}
-          placeholder="Search by title or author"
+          placeholder="Search titles or authors"
           onChange={(event) => onSearchTermChange(event.target.value)}
         />
       </label>
 
-      <label>
+      <label htmlFor="genre-filter">
         Genre
-        <select value={selectedGenre} onChange={(event) => onGenreChange(event.target.value)}>
+        <select
+          id="genre-filter"
+          value={selectedGenre}
+          onChange={(event) => onGenreChange(event.target.value)}
+        >
           <option value="all">All genres</option>
           {genres.map((genre) => (
             <option key={genre} value={genre}>
@@ -44,9 +49,10 @@ export function BookFilters({
         </select>
       </label>
 
-      <label>
-        Status
+      <label htmlFor="reading-status-filter">
+        Reading status
         <select
+          id="reading-status-filter"
           value={readingStatus}
           onChange={(event) => onReadingStatusChange(event.target.value as ReadingStatus)}
         >
